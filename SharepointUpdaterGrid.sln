@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharepointUpdaterGrid", "SharepointUpdaterGrid\SharepointUpdaterGrid.csproj", "{7274FB45-023A-4CE8-BA18-A1BBE862982B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7274FB45-023A-4CE8-BA18-A1BBE862982B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7274FB45-023A-4CE8-BA18-A1BBE862982B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7274FB45-023A-4CE8-BA18-A1BBE862982B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7274FB45-023A-4CE8-BA18-A1BBE862982B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F62D1EC-CDD2-4C97-9A04-5A675986385C}
+	EndGlobalSection
+EndGlobal

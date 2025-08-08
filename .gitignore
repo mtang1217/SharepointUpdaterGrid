@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Compiled files
+*.exe
+*.dll
+*.pdb
+
+# Publish folder
+publish/
+
+# Secrets
+appsettings.json
