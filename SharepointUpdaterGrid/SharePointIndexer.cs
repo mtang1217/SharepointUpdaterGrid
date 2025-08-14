@@ -320,6 +320,12 @@ class SharePointIndexer
                     string field = null;
                     switch (pair.Key)
                     {
+                        case "ChildFirstName":
+                            field = "FirstName"; break;
+                        case "ChildLastName":
+                            field = "LastName"; break;
+                        case "DOB":
+                            field = "dob"; break;
                         case "NYEIS_x0020_ID_x0020__x002d__x0020_NEW":
                             field = "EI_ID"; break;
                         case "Student_x0020_ID_x0020_MCM":

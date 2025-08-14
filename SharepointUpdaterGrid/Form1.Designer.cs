@@ -44,13 +44,17 @@
             this.indexerClick = new System.Windows.Forms.Button();
             this.timeLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.EIID = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.StudentID = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // firstNameLabel
             // 
             this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(131, 56);
+            this.firstNameLabel.Location = new System.Drawing.Point(40, 62);
             this.firstNameLabel.Name = "firstNameLabel";
             this.firstNameLabel.Size = new System.Drawing.Size(72, 16);
             this.firstNameLabel.TabIndex = 0;
@@ -59,24 +63,24 @@
             // 
             // firstName
             // 
-            this.firstName.Location = new System.Drawing.Point(209, 50);
+            this.firstName.Location = new System.Drawing.Point(118, 59);
             this.firstName.Name = "firstName";
-            this.firstName.Size = new System.Drawing.Size(125, 22);
+            this.firstName.Size = new System.Drawing.Size(70, 22);
             this.firstName.TabIndex = 1;
             this.firstName.TextChanged += new System.EventHandler(this.firstName_TextChanged);
             // 
             // lastName
             // 
-            this.lastName.Location = new System.Drawing.Point(431, 50);
+            this.lastName.Location = new System.Drawing.Point(294, 59);
             this.lastName.Name = "lastName";
-            this.lastName.Size = new System.Drawing.Size(131, 22);
+            this.lastName.Size = new System.Drawing.Size(126, 22);
             this.lastName.TabIndex = 3;
             this.lastName.TextChanged += new System.EventHandler(this.lastName_TextChanged);
             // 
             // lastNameLabel
             // 
             this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(353, 56);
+            this.lastNameLabel.Location = new System.Drawing.Point(216, 61);
             this.lastNameLabel.Name = "lastNameLabel";
             this.lastNameLabel.Size = new System.Drawing.Size(72, 16);
             this.lastNameLabel.TabIndex = 2;
@@ -85,16 +89,16 @@
             // 
             // DOB
             // 
-            this.DOB.Location = new System.Drawing.Point(732, 50);
+            this.DOB.Location = new System.Drawing.Point(574, 58);
             this.DOB.Name = "DOB";
-            this.DOB.Size = new System.Drawing.Size(159, 22);
+            this.DOB.Size = new System.Drawing.Size(94, 22);
             this.DOB.TabIndex = 5;
             this.DOB.TextChanged += new System.EventHandler(this.DOB_TextChanged);
             // 
             // DOBLabel
             // 
             this.DOBLabel.AutoSize = true;
-            this.DOBLabel.Location = new System.Drawing.Point(593, 56);
+            this.DOBLabel.Location = new System.Drawing.Point(435, 61);
             this.DOBLabel.Name = "DOBLabel";
             this.DOBLabel.Size = new System.Drawing.Size(133, 16);
             this.DOBLabel.TabIndex = 4;
@@ -104,7 +108,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(46, 80);
+            this.dataGridView1.Location = new System.Drawing.Point(43, 95);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -114,7 +118,7 @@
             // 
             // search
             // 
-            this.search.Location = new System.Drawing.Point(935, 50);
+            this.search.Location = new System.Drawing.Point(976, 19);
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(75, 23);
             this.search.TabIndex = 7;
@@ -124,7 +128,7 @@
             // 
             // cancel
             // 
-            this.cancel.Location = new System.Drawing.Point(778, 523);
+            this.cancel.Location = new System.Drawing.Point(775, 538);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 8;
@@ -134,7 +138,7 @@
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(890, 523);
+            this.submit.Location = new System.Drawing.Point(887, 538);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(75, 23);
             this.submit.TabIndex = 9;
@@ -145,7 +149,7 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(514, 526);
+            this.statusLabel.Location = new System.Drawing.Point(511, 541);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(48, 16);
             this.statusLabel.TabIndex = 10;
@@ -170,7 +174,7 @@
             // 
             // indexerClick
             // 
-            this.indexerClick.Location = new System.Drawing.Point(46, 523);
+            this.indexerClick.Location = new System.Drawing.Point(43, 538);
             this.indexerClick.Name = "indexerClick";
             this.indexerClick.Size = new System.Drawing.Size(75, 23);
             this.indexerClick.TabIndex = 13;
@@ -195,11 +199,48 @@
             this.progressBar1.Size = new System.Drawing.Size(553, 23);
             this.progressBar1.TabIndex = 15;
             // 
+            // EIID
+            // 
+            this.EIID.Location = new System.Drawing.Point(725, 58);
+            this.EIID.Name = "EIID";
+            this.EIID.Size = new System.Drawing.Size(71, 22);
+            this.EIID.TabIndex = 17;
+            this.EIID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(684, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 16);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "EI ID";
+            // 
+            // StudentID
+            // 
+            this.StudentID.Location = new System.Drawing.Point(894, 59);
+            this.StudentID.Name = "StudentID";
+            this.StudentID.Size = new System.Drawing.Size(92, 22);
+            this.StudentID.TabIndex = 19;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(820, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 16);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Student ID";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1103, 622);
+            this.Controls.Add(this.StudentID);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.EIID);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.indexerClick);
@@ -218,6 +259,7 @@
             this.Controls.Add(this.firstNameLabel);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -242,6 +284,10 @@
         private System.Windows.Forms.Button indexerClick;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TextBox EIID;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox StudentID;
+        private System.Windows.Forms.Label label2;
     }
 }
 

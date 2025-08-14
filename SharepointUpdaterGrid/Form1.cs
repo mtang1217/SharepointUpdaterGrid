@@ -29,6 +29,8 @@ namespace SharepointUpdaterGrid
             firstName.Text = "Three";
             lastName.Text = "Test Child Three";
             DOB.Text = "2022-09-01";
+            EIID.Text = "765432";
+            StudentID.Text = "333444555";
             progressBar1.Minimum = 0;
             progressBar1.Value = 0;
             progressBar1.Step = 1;
@@ -102,28 +104,32 @@ namespace SharepointUpdaterGrid
                 string fName = firstName.Text.Trim();
                 string lName = lastName.Text.Trim();
                 string dob = DOB.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(fName) || string.IsNullOrWhiteSpace(lName) || string.IsNullOrWhiteSpace(dob) || string.IsNullOrWhiteSpace(filePath))
+                string eiID = EIID.Text.Trim();
+                string studentID = StudentID.Text.Trim();
+                if (File.Exists("indexed_metadata.db"))
                 {
-                    MessageBox.Show("Please fill out all fields.");
+                    LoadFromDatabase(fName, lName, dob, eiID, studentID);
                 }
                 else
                 {
-                    if (!DateTime.TryParse(DOB.Text.Trim(), out var parsedDob))
+                    if (string.IsNullOrWhiteSpace(fName) || string.IsNullOrWhiteSpace(lName) || string.IsNullOrWhiteSpace(dob) || string.IsNullOrWhiteSpace(filePath))
                     {
-                        MessageBox.Show("DOB format should be yyyy-MM-dd");
+                        MessageBox.Show("Please fill out all fields.");
                         return;
-                    }
-                    dob = parsedDob.ToString("yyyy-MM-dd");
-                    if (File.Exists("indexed_metadata.db"))
-                    {
-                        LoadFromDatabase(fName, lName, dob);
                     }
                     else
                     {
-                        await LoadData(fName, lName, dob, filePath);
+                        if (!DateTime.TryParse(DOB.Text.Trim(), out var parsedDob))
+                        {
+                            MessageBox.Show("DOB format should be yyyy-MM-dd");
+                            return;
+                        }
+                        dob = parsedDob.ToString("yyyy-MM-dd");
+
                     }
+                    await LoadData(fName, lName, dob, filePath);
                 }
+                
             }
             finally
             {
@@ -245,6 +251,14 @@ namespace SharepointUpdaterGrid
                     if (oldRow == null) continue;
 
                     var payload = new Dictionary<string, object>();
+                    if (!Equals(oldRow["First Name"], newRow["First name"]))
+                        payload["ChildFirstName"] = newRow["First Name"];
+
+                    if (!Equals(oldRow["Last Name"], newRow["Last name"]))
+                        payload["ChildLastName"] = newRow["Last Name"];
+
+                    if (!Equals(oldRow["DOB"], newRow["DOB"]))
+                        payload["DOB"] = newRow["DOB"];
 
                     if (!Equals(oldRow["Student ID"], newRow["Student ID"]))
                         payload["Student_x0020_ID_x0020_MCM"] = newRow["Student ID"];
@@ -343,7 +357,7 @@ namespace SharepointUpdaterGrid
             }
         }
 
-        private void LoadFromDatabase(string firstName, string lastName, string dob)
+        private void LoadFromDatabase(string firstName, string lastName, string dob, string eiID, string studentID)
         {
             DateTime dt = DateTime.Now;
             statusLabel.Text = "🔄 Searching local index...";
@@ -362,7 +376,7 @@ namespace SharepointUpdaterGrid
                 using (var conn = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
                 {
                     conn.Open();
-                    string sql = BuildSqlQuery(firstName, lastName, dob);
+                    string sql = BuildSqlQuery(firstName, lastName, dob, eiID, studentID);
                     using (var command = new SQLiteCommand(sql, conn))
                     using (var reader = command.ExecuteReader())
                     {
@@ -370,6 +384,9 @@ namespace SharepointUpdaterGrid
 
                         // Create the expected columns
                         result.Columns.Add("Doc ID");
+                        result.Columns.Add("First Name");
+                        result.Columns.Add("Last Name");
+                        result.Columns.Add("DOB");
                         result.Columns.Add("Student ID");
                         result.Columns.Add("EI ID");
                         result.Columns.Add("Foster Care Agency");
@@ -384,6 +401,9 @@ namespace SharepointUpdaterGrid
                         {
                             var row = result.NewRow();
                             row["Doc ID"] = reader["DocID"] ?? "";
+                            row["First Name"] = reader["FirstName"] ?? "";
+                            row["Last Name"] = reader["LastName"] ?? "";
+                            row["DOB"] = reader["dob"] ?? "";
                             row["Student ID"] = reader["Student_ID"] ?? "";
                             row["EI ID"] = reader["EI_ID"] ?? "";
                             row["Foster Care Agency"] = reader["Agency"] ?? "";
@@ -401,6 +421,7 @@ namespace SharepointUpdaterGrid
                         workingTable = originalTable.Copy();
                         ConfigureDataGridView();
                         dataGridView1.DataSource = workingTable;
+                        
                         if (workingTable.Rows.Count == 0)
                         {
                             statusLabel.Text = "⚠ No records found.";
@@ -408,6 +429,9 @@ namespace SharepointUpdaterGrid
                         }
                         else
                         {
+                            dataGridView1.Columns[0].ReadOnly = true;
+                            dataGridView1.Columns[10].ReadOnly = true;
+                            dataGridView1.Columns[11].ReadOnly = true;
                             statusLabel.Text = $"✅ {workingTable.Rows.Count} record(s) found.";
                             statusLabel.ForeColor = Color.SeaGreen;
                         }
@@ -421,7 +445,7 @@ namespace SharepointUpdaterGrid
                 statusLabel.ForeColor = Color.Red;
             }
         }
-        private string BuildSqlQuery(string firstName, string lastName, string dob)
+        private string BuildSqlQuery(string firstName, string lastName, string dob, string eiID, string studentID)
         {
             List<string> conditions = new List<string>();
 
@@ -433,6 +457,12 @@ namespace SharepointUpdaterGrid
 
             if (!string.IsNullOrWhiteSpace(dob))
                 conditions.Add($"\"DOB\" LIKE '%{dob.Replace("'", "''")}%'");
+
+            if (!string.IsNullOrWhiteSpace(eiID))
+                conditions.Add($"\"EI_ID\" LIKE '{eiID.Replace("'", "''")}'");
+
+            if (!string.IsNullOrWhiteSpace(studentID))
+                conditions.Add($"\"Student_ID\" LIKE '{studentID.Replace("'", "''")}'");
 
             string whereClause = conditions.Count > 0 ? "WHERE " + string.Join(" AND ", conditions) : "";
             //NAME OF TABLE IS "Files"
@@ -446,5 +476,14 @@ namespace SharepointUpdaterGrid
             submit.Enabled = enabled;
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
