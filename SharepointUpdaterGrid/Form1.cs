@@ -384,6 +384,7 @@ namespace SharepointUpdaterGrid
 
                         // Create the expected columns
                         result.Columns.Add("Doc ID");
+                        result.Columns.Add("Source");
                         result.Columns.Add("First Name");
                         result.Columns.Add("Last Name");
                         result.Columns.Add("DOB");
@@ -393,7 +394,6 @@ namespace SharepointUpdaterGrid
                         result.Columns.Add("District");
                         result.Columns.Add("Guard Email");
                         result.Columns.Add("Guard Phone");
-                        result.Columns.Add("Source");
                         result.Columns.Add("FileUrl");
 
                         // Populate the data
@@ -401,6 +401,7 @@ namespace SharepointUpdaterGrid
                         {
                             var row = result.NewRow();
                             row["Doc ID"] = reader["DocID"] ?? "";
+                            row["Source"] = reader["Source"] ?? "";
                             row["First Name"] = reader["FirstName"] ?? "";
                             row["Last Name"] = reader["LastName"] ?? "";
                             row["DOB"] = reader["dob"] ?? "";
@@ -410,7 +411,6 @@ namespace SharepointUpdaterGrid
                             row["District"] = reader["District"] ?? "";
                             row["Guard Email"] = reader["Email"] ?? "";
                             row["Guard Phone"] = reader["Phone"] ?? "";
-                            row["Source"] = reader["Source"] ?? "";
                             row["FileUrl"] = reader["fileUrl"] ?? "";
                             result.Rows.Add(row);
                         }
@@ -430,7 +430,7 @@ namespace SharepointUpdaterGrid
                         else
                         {
                             dataGridView1.Columns[0].ReadOnly = true;
-                            dataGridView1.Columns[10].ReadOnly = true;
+                            dataGridView1.Columns[1].ReadOnly = true;
                             dataGridView1.Columns[11].ReadOnly = true;
                             statusLabel.Text = $"✅ {workingTable.Rows.Count} record(s) found.";
                             statusLabel.ForeColor = Color.SeaGreen;
