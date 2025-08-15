@@ -9,6 +9,8 @@ A C# WinForms desktop application that leverages the SharePoint REST API and SQL
 - Local SQLite caching for fast searches and offline indexing  
 - Asynchronous API calls with progress indicators and error handling  
 - Support for metadata update validation and rollback
+- Reduces reliance on Sharepoint UI
+- Estimated to save hours per month
 
 ## Tech Stack
 
